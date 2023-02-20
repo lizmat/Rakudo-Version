@@ -9,7 +9,7 @@
   ],
   "description": "provide a \"rakudo version\" pragma",
   "license": "Artistic-2.0",
-  "name": "rakudo",
+  "name": "Rakudo::Version",
   "perl": "6.c",
   "provides": {
     "rakudo": "lib/rakudo.rakumod"
@@ -17,9 +17,9 @@
   "resources": [
   ],
   "source-url": "https://github.com/lizmat/Rakudo-Version.git",
-  "tags": [
+  "tags": [ "VERSION"
   ],
   "test-depends": [
   ],
-  "version": "0.0.1"
+  "version": "0.0.2"
 }
