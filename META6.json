@@ -17,9 +17,10 @@
   "resources": [
   ],
   "source-url": "https://github.com/lizmat/Rakudo-Version.git",
-  "tags": [ "VERSION"
+  "tags": [
+    "VERSION"
   ],
   "test-depends": [
   ],
-  "version": "0.0.2"
+  "version": "0.0.3"
 }

@@ -16,11 +16,11 @@ use rakudo v2022.01;
 use rakudo v2022.01+;
 
 # more elaborate checks with a Callable
-use rakudo { $_ == v2022.01 || $_ >= v2022.07+ }
+use rakudo { $_ ~~ v2022.01 || $_ ~~ v2022.07+ }
 
 # custom error message
 use rakudo {
-    $_ >= v2022.07+ || die "$_ is not recent enough for this"
+    $_ ~~ v2022.07+ || die "$_ is not recent enough for this"
 }
 ```
 
