@@ -8,9 +8,16 @@ plan 6;
 pass "Use command executed ok";
 
 eval-lives-ok "use rakudo $VERSION.raku()",  "did $VERSION match ok";
-eval-dies-ok  "use rakudo $VERSION.raku()+", "did $VERSION+ not match";
-eval-dies-ok  "use rakudo $VERSION.raku()*", "did $VERSION* not match";
+throws-like { "use rakudo $VERSION.raku()+".EVAL }, X::AdHoc,
+  payload => / '+ not supported' /,
+  "did $VERSION+ not match";
+throws-like { "use rakudo $VERSION.raku().*".EVAL }, X::AdHoc,
+  payload => / '* not supported' /,
+  "did $VERSION.* not match";
+
 eval-lives-ok "use rakudo * >= v2015.12",    "did * >= v2025.12 match";
-eval-dies-ok  "use rakudo * >= v9999999",    "did * >= v9999999 not match";
+throws-like { "use rakudo * > v9999999".EVAL }, X::AdHoc,
+  payload => / 'Version matcher failed to accept' /,
+  "did * > v9999999 not match";
 
 # vim: expandtab shiftwidth=4

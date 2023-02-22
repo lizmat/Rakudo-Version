@@ -9,11 +9,8 @@ SYNOPSIS
 ========
 
 ```raku
-# fixed version means >=
+# use >= check on version
 use rakudo v2022.01;
-
-# version with qualifier checks with >
-use rakudo v2022.01+;
 
 # more elaborate checks with a Callable
 use rakudo { $_ ~~ v2022.01 || $_ ~~ v2022.07+ }
@@ -29,7 +26,7 @@ DESCRIPTION
 
 The Rakudo::Version distribution provides a `use rakudo` pragma that allows one to specify with which version of Rakudo a program is supposed to run.
 
-Version checking occurs either by specifiying a `Version` value (which can either be a fixed version, or a less specific version with qualifiers). Or it can be a `Callable` which will be given the current `Version` value, and which should return a `Bool` indicating whether or not the Rakudo release is acceptable.
+Version checking occurs either by specifiying a `Version` value (which can must be a fixed version), or it can be a `Callable` which will be given the current `Version` value, and which should return a `Bool` indicating whether or not the Rakudo release is acceptable.
 
 PRIOR ART
 =========
