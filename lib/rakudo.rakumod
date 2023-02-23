@@ -9,13 +9,9 @@ BEGIN {
 }
 
 multi sub EXPORT(Version:D $version) {
-    $version.plus
-      ?? die "+ not supported here, use Callable for more complex version checking"
-      !! $version.whatever
-        ?? die "* not supported here, use Callable for more complex version checking"
-        !! $VERSION >= $version
-          ?? Map.new
-          !! die "Needs at least release $version of Rakudo, this is $VERSION";
+    $VERSION ~~ $version
+      ?? Map.new
+      !! die "Needs at least release $version of Rakudo, this is $VERSION";
 }
 
 multi sub EXPORT(&matcher) {
@@ -34,8 +30,11 @@ Rakudo::Version - provide a "rakudo version" pragma
 
 =begin code :lang<raku>
 
-# use >= check on version
+# Exactly this version
 use rakudo v2022.01;
+
+# From this version onward
+use rakudo v2023.02+;
 
 # more elaborate checks with a Callable
 use rakudo { $_ ~~ v2022.01 || $_ ~~ v2022.07+ }
@@ -53,10 +52,11 @@ The Rakudo::Version distribution provides a C<use rakudo> pragma that
 allows one to specify with which version of Rakudo a program is supposed
 to run.
 
-Version checking occurs either by specifiying a C<Version> value (which
-can must be a fixed version), or it can be a C<Callable> which will be
-given the current C<Version> value, and which should return a C<Bool>
-indicating whether or not the Rakudo release is acceptable.
+Version checking occurs either by specifying a C<Version> value (which
+will be smart-matched with the current compiler C<Version>), or it can
+be a C<Callable> which will be given the current C<Version> value,
+and which should return a C<Bool> indicating whether or not the Rakudo
+release is acceptable.
 
 =head1 PRIOR ART
 

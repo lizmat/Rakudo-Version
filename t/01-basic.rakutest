@@ -1,5 +1,5 @@
 use Test;
-use rakudo v2015.12;
+use rakudo v2015.12+;
 
 my $VERSION := $*RAKU.compiler.version;
 
@@ -7,15 +7,11 @@ plan 6;
 
 pass "Use command executed ok";
 
-eval-lives-ok "use rakudo $VERSION.raku()",  "did $VERSION match ok";
-throws-like { "use rakudo $VERSION.raku()+".EVAL }, X::AdHoc,
-  payload => / '+ not supported' /,
-  "did $VERSION+ not match";
-throws-like { "use rakudo $VERSION.raku().*".EVAL }, X::AdHoc,
-  payload => / '* not supported' /,
-  "did $VERSION.* not match";
+eval-lives-ok "use rakudo $VERSION.raku()",   "did $VERSION match ok";
+eval-lives-ok "use rakudo $VERSION.raku()+",  "did $VERSION+ match ok";
+eval-lives-ok "use rakudo $VERSION.raku().*", "did $VERSION.* match ok";
+eval-lives-ok "use rakudo * >= v2015.12",     "did * >= v2025.12 match";
 
-eval-lives-ok "use rakudo * >= v2015.12",    "did * >= v2025.12 match";
 throws-like { "use rakudo * > v9999999".EVAL }, X::AdHoc,
   payload => / 'Version matcher failed to accept' /,
   "did * > v9999999 not match";
