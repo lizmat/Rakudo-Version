@@ -11,7 +11,7 @@ BEGIN {
 multi sub EXPORT(Version:D $version) {
     $VERSION ~~ $version
       ?? Map.new
-      !! die "Needs at least release $version of Rakudo, this is $VERSION";
+      !! die "$version failed to accept release $VERSION of Rakudo";
 }
 
 multi sub EXPORT(&matcher) {
@@ -36,10 +36,10 @@ use rakudo v2022.01;
 # From this version onward
 use rakudo v2023.02+;
 
-# more elaborate checks with a Callable
+# More elaborate checks with a Callable
 use rakudo { $_ ~~ v2022.01 || $_ ~~ v2022.07+ }
 
-# custom error message
+# Custom error message
 use rakudo {
     $_ ~~ v2022.07+ || die "$_ is not recent enough for this"
 }
