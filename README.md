@@ -15,10 +15,10 @@ use rakudo v2022.01;
 # From this version onward
 use rakudo v2023.02+;
 
-# more elaborate checks with a Callable
+# More elaborate checks with a Callable
 use rakudo { $_ ~~ v2022.01 || $_ ~~ v2022.07+ }
 
-# custom error message
+# Custom error message
 use rakudo {
     $_ ~~ v2022.07+ || die "$_ is not recent enough for this"
 }
